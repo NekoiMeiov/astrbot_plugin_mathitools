@@ -34,7 +34,7 @@ git clone https://github.com/fudengming/astrbot_plugin_mathitools
 
 - [x] 支持<b>\+、\-、\*、\/、\*\*、\%</b>
 - [x] 支持比较两个数学表达式的大小
-- [ ] 支持<b>\√</b>
+- [ ] 支持<b>√</b>
 
 ## 贡献指南
 
