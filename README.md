@@ -6,8 +6,8 @@ _✨ 基于numexpr.evaluate的[astrbot](https://github.com/AstrBotDevs/AstrBot) 
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
-[![AstrBot](https://img.shields.io/badge/AstrBot-3.4%2B-orange.svg)](https://github.com/Soulter/AstrBot)
-[![GitHub](https://img.shields.io/badge/NekoiMeiov__Team-blue)](https://github.com/NekoiMeiov)
+[![AstrBot](https://img.shields.io/badge/AstrBot-3.4%2B-yellow.svg)](https://github.com/Soulter/AstrBot)
+[![GitHub](https://img.shields.io/badge/NekoiMeiov__Team-orange.svg?style=for-the-badge)](https://github.com/NekoiMeiov)
 
 </div>
 
