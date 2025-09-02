@@ -32,9 +32,10 @@ git clone https://github.com/NekoiMeiov/astrbot_plugin_mathitools
 
 ## TODO
 
-- [x] 支持<b>\+、\-、\*、\/、\*\*、\%</b>
+- [x] 支持<b>基本的加、减、乘、除、幂运算、取模、整除和任意次方根</b>
 - [x] 支持比较两个数学表达式的大小
-- [ ] 支持<b>√</b>
+- [ ] 修复浮点数精度问题
+- [ ] 支持<b>三角函数</b>
 
 ## 贡献指南
 

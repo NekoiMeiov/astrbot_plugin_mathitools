@@ -7,7 +7,7 @@ import numexpr as ne
     "astrbot_plugin_mathitools", 
     "FDMNya~", 
     "增加数学运算工具", 
-    "1.0.0", 
+    "1.0.1", 
     "https://github.com/fudengming/astrbot_plugin_mathitools"
 )
 class Mathitools(Star):
@@ -27,6 +27,9 @@ class Mathitools(Star):
         "+" 表示两数相加
         "**" 表示冥运算
         "%" 表示取模运算
+        "//" 表示取整除运算
+        "x**(1/n)" 表示取x的n次方根
+        "()" 表示括号，能嵌套
 
         Args:
             expression(string): 数学表达式
