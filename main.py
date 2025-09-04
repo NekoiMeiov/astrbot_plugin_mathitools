@@ -102,10 +102,7 @@ class Mathitools(Star):
         '''
         try:
             result = self._safe_eval_expr(expression.strip())
-            if mpmath.isint(result):
-                return f"{int(result)}"
-            else:
-                return mpmath.nstr(result, n=50, strip_zeros=True)
+            return mpmath.nstr(result, n=mpmath.mp.dps, strip_zeros=True)
         except Exception as e:
             return f"计算出错：{str(e)}"
 
