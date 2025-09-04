@@ -5,16 +5,14 @@ from astrbot.api import logger, AstrBotConfig
 import mpmath
 from decimal import Decimal
 import re
-
-# 设置默认精度
-mpmath.mp.dps = 100
+from asteval import Interpreter, get_ast_names
 
 @register(
     "astrbot_plugin_mathitools",
     "NekoiMeiov_Team",
     "增加较为简单的高精度数学运算工具",
-    "2.1.0",
-    "https://github.com/NekoiMeiov/astrbot_plugin_mathitools "
+    "2.1.3",
+    "https://github.com/NekoiMeiov/astrbot_plugin_mathitools"
 )
 class Mathitools(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
@@ -31,33 +29,49 @@ class Mathitools(Star):
         """
         # 预处理：替换 ^ 为 **
         expr = expr.replace('^', '**')
-        # 简单的安全检查：只允许数字、括号、基本运算符和函数名
-        if not re.match(r'^[0-9+\-*/().,eE \t\[\]{}a-df-zA-DF-Z_°]*$', expr):
-            raise ValueError("表达式包含非法字符")
-
-        # 使用 mpmath 计算表达式
+    
+        # 创建 asteval 解释器
+        aeval = Interpreter()
+    
+        # 清空默认的命名空间，仅允许显式添加的内容
+        aeval.symtable.clear()
+    
+        # 注入 mpmath 高精度常量和函数
+        aeval.symtable['pi'] = mpmath.pi
+        aeval.symtable['e'] = mpmath.e
+        aeval.symtable['sqrt'] = mpmath.sqrt
+        aeval.symtable['cbrt'] = mpmath.cbrt
+        aeval.symtable['pow'] = mpmath.power
+        aeval.symtable['ln'] = mpmath.ln
+        aeval.symtable['sin'] = mpmath.sin
+        aeval.symtable['cos'] = mpmath.cos
+        aeval.symtable['tan'] = mpmath.tan
+        aeval.symtable['deg'] = lambda x: mpmath.mpf(x) * mpmath.pi / 180
+    
+        # 定义 root 函数：root(x, n) 表示 x 的 n 次方根
+        def root(x, n):
+            return mpmath.power(x, mpmath.mpf(1)/n)
+    
+        # 定义 logx 函数：logx(x, y) 表示以 y 为底 x 的对数
+        def logx(x, y=10):
+            if y == 1 or y<=0:
+                raise ValueError(f"底值错误")
+            return mpmath.log(x, y)
+    
+        aeval.symtable['root'] = root
+        aeval.symtable['log'] = logx
+    
+        # 使用 asteval 解析并求值
         try:
-            # 自定义命名空间
-            namespace = {
-                'pi': mpmath.pi,
-                'e': mpmath.e,
-                'sqrt': mpmath.sqrt,
-                'cbrt': mpmath.cbrt,
-                'root': lambda x, n: mpmath.power(x, 1/n),
-                'pow': mpmath.power,
-                'log': mpmath.log,
-                'ln': mpmath.ln,
-                'sin': mpmath.sin,
-                'cos': mpmath.cos,
-                'tan': mpmath.tan,
-                'deg': lambda x: mpmath.mpf(x) * mpmath.pi / 180,
-                # 更多函数可扩展
-            }
-            # 将整数/小数字符串转为 mpmath.mpf
-            result = eval(expr, {"__builtins__": {}}, namespace)
+            result = aeval(expr)
+            if aeval.error:
+                raise ValueError(f"asteval error: {aeval.error}")
+            if result is None:
+                raise ValueError("表达式未返回有效结果")
             return mpmath.mpf(result)
         except Exception as e:
             raise ValueError(f"表达式计算失败: {str(e)}")
+
 
     @filter.llm_tool(name="expression")
     async def expression(self, event: AstrMessageEvent, expression: str) -> MessageEventResult:
@@ -78,7 +92,8 @@ class Mathitools(Star):
         - "root(x, n)": 计算 x 的 n 次方根（如 root(8, 3)：计算8的3次方）
         - "pi" : 圆周率 π（约 3.14159...）
         - "e"  : 自然常数 e（约 2.71828...）
-        - "log(x)" : 以 e 为底的对数（即 ln）
+        - "ln(x)" : 以 e 为底的对数（即自然对数）
+        - "log(x, y)" : 以 y 为底 x 的对数（y>0且y≠1，若y未填写则默认为10，即常用对数）
         - "sin(x)", "cos(x)", "tan(x)" : 三角函数（输入为弧度，若需要计算角度制的三角函数，请先使用deg进行转换）
         - "deg(x)" : 将角度 x 转换为弧度（如 deg(45)：将角度45度转换为弧度）
 

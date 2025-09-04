@@ -1,6 +1,6 @@
 name: astrbot_plugin_mathitools
-desc: "基于mpmath&eval的简易数学表达式支持"
+desc: "基于mpmath&asteval的简易数学表达式支持"
 help: Null
-version: v2.1.0
+version: v2.1.3
 author: NekoiMeiov_Team
 repo: https://github.com/NekoiMeiov/astrbot_plugin_mathitools
