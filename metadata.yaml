@@ -1,5 +1,5 @@
 name: astrbot_plugin_mathitools
-desc: 增加简单的高精度数学运算工具
+desc: "基于mpmath&eval的简易数学表达式支持"
 help: Null
 version: v2.1.0
 author: NekoiMeiov_Team
