@@ -11,10 +11,10 @@ mpmath.mp.dps = 100
 
 @register(
     "astrbot_plugin_mathitools",
-    "FDMNya~",
+    "NekoiMeiov_Team",
     "增加较为简单的高精度数学运算工具",
     "2.1.0",
-    "https://github.com/fudengming/astrbot_plugin_mathitools "
+    "https://github.com/NekoiMeiov/astrbot_plugin_mathitools "
 )
 class Mathitools(Star):
     def __init__(self, context: Context, config: AstrBotConfig):
