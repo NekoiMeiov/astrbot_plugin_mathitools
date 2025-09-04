@@ -14,7 +14,8 @@ from asteval import Interpreter, get_ast_names
     "2.1.3",
     "https://github.com/NekoiMeiov/astrbot_plugin_mathitools"
 )
-class Mathitools(Star):
+class MathITools(Star):
+    # MathITools简称MIT（？还带整活的
     def __init__(self, context: Context, config: AstrBotConfig):
         super().__init__(context)
         mpmath.mp.dps = config.get("dps", 50)
