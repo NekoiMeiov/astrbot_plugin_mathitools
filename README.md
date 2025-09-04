@@ -2,7 +2,7 @@
 
 # astrbot_plugin_mathitools
 
-_✨ 基于mpmath&eval的[astrbot](https://github.com/AstrBotDevs/AstrBot) 数学表达式支持插件 ✨_  
+_✨ 基于mpmath&asteval的[astrbot](https://github.com/AstrBotDevs/AstrBot) 数学表达式支持插件 ✨_  
 
 [![License](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg)](https://www.python.org/)
@@ -13,7 +13,7 @@ _✨ 基于mpmath&eval的[astrbot](https://github.com/AstrBotDevs/AstrBot) 数�
 
 ## 介绍
 
-基于mpmath&eval，让AI能够进行简单的高精度数学运算
+基于mpmath&asteval，让AI能够进行简单的高精度数学运算
 
 ## 安装
 
@@ -31,18 +31,14 @@ git clone https://github.com/NekoiMeiov/astrbot_plugin_mathitools
 # 控制台重启AstrBot
 ```
 
-### 从v1版本升级
-1. 登录仪表盘，进入控制台，点击安装pip库
-2. 在库名一栏写入mpmath，随后安装
-3. 最后回到插件管理升级mathitools
-
 ## TODO
 
 - [x] 支持<b>基本的加、减、乘、除、幂运算、取模、整除和任意次方根</b>
 - [x] 支持比较两个数学表达式的大小
 - [x] 修复浮点数精度问题
 - [x] 支持<b>三角函数</b>
-- [ ] 自定义精度
+- [x] 自定义精度
+- [x] 支持<b>对数</b>
 - [ ] 支持<b>微积分</b>
 
 ## 贡献指南
